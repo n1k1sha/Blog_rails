@@ -7,9 +7,36 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="<%= root_path %>">Статьи</a>
+            </li>
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link active" href= "<%= new_article_path %>" >Новая статья</a>
+            </li>
+            <% end %>
+          </ul>
+          </div>
+        <li class="nav justify-content-end">
+          <% if user_signed_in? %>
+            <%= current_user.email %>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+            <%= button_to "Edit", edit_user_registration_path, method: :get %>
+          <% else %>
+            <%= button_to "Sign in", new_user_session_path %> 
+            <%= button_to "Sign up", new_user_registration_path, method: :get %> 
+          <% end %>
+        </li>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

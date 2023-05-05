@@ -1,2 +1,21 @@
-<h1>Articles#index</h1>
-<p>Find me in app/views/articles/index.html.erb</p>
+<h1>Статьи</h1>
+
+<% if user_signed_in? %> 
+  <%= link_to 'Все', root_path(filter: "My")  %>
+  <%= link_to 'Мои', root_path(filter: "All") %>
+<% end %>
+
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <%= link_to article.title, article %>
+    </li>
+  <% end %>
+</ul>
+
+<div>
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+</div>
+<p>
+  <%== pagy_info @pagy %>
+</p>

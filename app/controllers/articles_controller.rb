@@ -3,12 +3,12 @@ class ArticlesController < ApplicationController
   def index
     if user_signed_in?
       if params[:filter] == "My"
-        @pagy, @articles = pagy(Article.where(user_id: current_user.id).all, items: 2)
+        @pagy, @articles = pagy(Article.where(user_id: current_user.id).all, items: 15)
       else
-        @pagy, @articles = pagy(Article.all, items: 2)
+        @pagy, @articles = pagy(Article.all, items: 15)
       end
     else
-      @pagy, @articles = pagy(Article.all, items: 2)
+      @pagy, @articles = pagy(Article.all, items: 15)
     end
   end
 
